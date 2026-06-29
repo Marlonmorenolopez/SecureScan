@@ -1,0 +1,44 @@
+# SecureScan Pro v3.0 - Python Dependencies
+
+# Web framework
+flask>=3.0.0,<4.0.0
+flask-cors>=4.0.0,<5.0.0
+
+# Rate limiting (protege endpoints de abuso)
+flask-limiter>=3.5.0,<4.0.0
+
+# HTTP client para ZAP API y auto-login
+requests>=2.31.0,<3.0.0
+
+# Redis client
+redis>=5.0.0,<6.0.0
+
+# PDF: requiere wkhtmltopdf en el sistema (instalado en Dockerfile).
+# reporter.py maneja el error con try/except si no está disponible.
+pdfkit>=1.0.0,<2.0.0
+
+# Metasploit RPC client (opcional)
+# Si no está instalado, MetasploitScanner activa simulación automáticamente.
+pymetasploit3>=1.0.3
+
+# Wappalyzer (reemplaza WhatWeb)
+# Si no está instalado, WappalyzerScanner usa CLI o simulación.
+python-Wappalyzer>=0.3.1
+
+# Entorno
+python-dotenv>=1.0.0,<2.0.0
+
+# Validación de modelos
+pydantic>=2.0.0,<3.0.0
+
+# Templates HTML para reportes
+jinja2>=3.1.0,<4.0.0
+
+# Docker SDK — BUG FIX: eliminada la línea duplicada "docker" sin versión
+docker>=7.1.0
+
+# Parser HTML (usado por Wappalyzer y auto-login)
+beautifulsoup4>=4.12.0
+
+# Servidor WSGI — sync worker con threads (sin dependencias extra)
+gunicorn>=21.2.0
