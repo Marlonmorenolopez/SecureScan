@@ -132,17 +132,12 @@ ALLOWED_LAB_TARGETS = os.environ.get(
 
 RESTRICT_TO_LAB = os.environ.get('RESTRICT_TO_LAB_TARGETS', 'false').lower() == 'true'
 
+# NOTA: Se removieron los patrones de rangos privados (10.x, 192.168.x, 172.16-31.x)
+# para permitir escanear redes domésticas/locales propias del usuario.
 FORBIDDEN_PATTERNS = [
     r'^localhost',
-    r'^127\.',
     r'^0\.0\.0\.0',
-    r'^169\.254\.',
-    r'^10\.',
-    r'^192\.168\.',
-    r'^172\.(1[6-9]|2[0-9]|3[0-1])\.',
     r'^::1',
-    r'^fc00:',
-    r'^fe80:',
 ]
 
 # ── Circuit Breaker ───────────────────────────────────────────────────────────
@@ -302,8 +297,10 @@ def is_allowed_target(target: str) -> tuple:
                 return False, f"Target matches forbidden pattern: {pattern}"
         try:
             ip = ipaddress.ip_address(hostname)
-            if ip.is_private or ip.is_loopback or ip.is_link_local:
-                return False, "Private/loopback IP addresses are not allowed"
+            # NOTA: Se removió el bloqueo de IPs privadas para permitir escanear
+            # redes domésticas/locales del usuario. Solo se bloquea loopback.
+            if ip.is_loopback:
+                return False, "Loopback IP addresses are not allowed"
         except ValueError:
             pass
         return True, "Target allowed"

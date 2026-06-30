@@ -38,9 +38,9 @@ import {
 // ─── Helpers (sin cambios) ────────────────────────────────────────────────────
 function getGradeColor(grade: string): string {
   if (grade?.startsWith('A')) return 'text-emerald-400'
-  if (grade?.startsWith('B')) return 'text-blue-400'
-  if (grade?.startsWith('C')) return 'text-amber-400'
-  if (grade?.startsWith('D')) return 'text-orange-400'
+  if (grade?.startsWith('B')) return 'text-amber-400'
+  if (grade?.startsWith('C')) return 'text-orange-400'
+  if (grade?.startsWith('D')) return 'text-red-400'
   return 'text-red-400'
 }
 
@@ -104,7 +104,7 @@ function ScanRow({ scan, onDelete }: { scan: ScanStatusResponse; onDelete: (id: 
           {/* Grade compacto — solo mobile/tablet, en lg: ya existe la columna completa de Score */}
           {scan.score && (
             <span className={cn('shrink-0 font-mono text-xs font-bold lg:hidden', getGradeColor(scan.score.grade))}>
-              {scan.score.grade}
+              {scan.score.riskLevel === 'PROTEGIDO' ? '🛡️' : scan.score.riskLevel === 'VULNERABLE' ? '⚠️' : scan.score.riskLevel === 'EXPUESTO' ? '🚨' : '☠️'}
             </span>
           )}
         </div>
@@ -128,7 +128,7 @@ function ScanRow({ scan, onDelete }: { scan: ScanStatusResponse; onDelete: (id: 
         {scan.score ? (
           <div className="flex items-baseline gap-1">
             <span className={cn('font-mono text-2xl font-bold', getGradeColor(scan.score.grade))}>
-              {scan.score.grade}
+              {scan.score.riskLevel === 'PROTEGIDO' ? '🛡️ Protegido' : scan.score.riskLevel === 'VULNERABLE' ? '⚠️ Vulnerable' : scan.score.riskLevel === 'EXPUESTO' ? '🚨 Expuesto' : '☠️ Comprometido'}
             </span>
             <span className="font-mono text-xs text-muted-foreground">
               {scan.score.total}/100

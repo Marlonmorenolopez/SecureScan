@@ -409,6 +409,8 @@ def generate_html_report(scan: Dict[str, Any], locale: str = 'es') -> str:
             sev = sanitize_html(m.get('severity', 'info'))
             sev_colors = {'critical':'#ff3b3b','high':'#ff6b2b','medium':'#ffb800','low':'#3b9fff'}
             sc = sev_colors.get(sev, '#8899aa')
+            port_html = f'<span class="badge badge-info">:{m.get("port")}/{m.get("protocol","tcp")}</span>' if m.get("port") else ""
+            desc_html = f'<div class="vuln-desc">{sanitize_html(m.get("description",""))}</div>' if m.get("description") else ""
             items.append(
                 f'<div class="vuln-item" style="border-left-color:{sc};">'
                 f'<div class="vuln-header">'
@@ -417,9 +419,9 @@ def generate_html_report(scan: Dict[str, Any], locale: str = 'es') -> str:
                 f'</div>'
                 f'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">'
                 f'<span class="badge badge-info" style="font-family:monospace;font-size:11px;">{sanitize_html(m.get("module","-"))}</span>'
-                f'{f\'<span class="badge badge-info">:{m.get("port")}/{m.get("protocol","tcp")}</span>\' if m.get("port") else ""}'
+                f'{port_html}'
                 f'</div>'
-                f'{f\'<div class="vuln-desc">{sanitize_html(m.get("description",""))}</div>\' if m.get("description") else ""}'
+                f'{desc_html}'
                 f'</div>'
             )
         msf_html = f'''
@@ -446,6 +448,7 @@ def generate_html_report(scan: Dict[str, Any], locale: str = 'es') -> str:
                 f'<div class="vuln-solution"><strong style="color:#60a5fa;">{solution_label}:</strong> {sanitize_html(v.get("solution"))}</div>'
                 if v.get('solution') else ''
             )
+            cwe_html = f'<div style="margin-top:6px;">{cwe}</div>' if cwe else ""
             vuln_items.append(
                 f'<div class="vuln-item" style="border-left-color:{sc};">'
                 f'<div class="vuln-header">'
@@ -453,7 +456,7 @@ def generate_html_report(scan: Dict[str, Any], locale: str = 'es') -> str:
                 f'<span class="badge" style="background:{sc}22;color:{sc};border:1px solid {sc}44;">{sev.upper()}</span>'
                 f'</div>'
                 f'<div class="vuln-desc">{desc}</div>'
-                f'{f\'<div style="margin-top:6px;">{cwe}</div>\' if cwe else ""}'
+                f'{cwe_html}'
                 f'{sol}'
                 f'</div>'
             )

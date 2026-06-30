@@ -41,7 +41,7 @@ export const securityOverviewMock: SecurityOverviewMock = {
   totalVulnerabilities: 312,
   averageScore: 78,
   averageGrade: 'B',
-  riskLevel: 'MEDIUM',
+  riskLevel: 'VULNERABLE',
   breakdown: {
     critical: 9,
     high: 41,
@@ -90,7 +90,7 @@ export const securityScoreMock: SecurityScore = {
     'Aplicar parches a las dependencias con CVE conocido',
     'Revisar configuración de cabeceras de seguridad (CSP, HSTS)',
   ],
-  riskLevel: 'MEDIUM',
+  riskLevel: 'VULNERABLE',
 }
 
 // Top vulnerabilidades — mismo shape que Vulnerability (lib/api-client.ts)
@@ -179,7 +179,7 @@ export const recentActivityMock: RecentScanMock[] = [
     status: 'completed',
     startTime: '2026-06-19T14:02:00Z',
     endTime: '2026-06-19T14:11:32Z',
-    score: { ...securityScoreMock, total: 64, grade: 'C', riskLevel: 'HIGH' },
+    score: { ...securityScoreMock, total: 64, grade: 'C', riskLevel: 'EXPUESTO' },
   },
   {
     id: 'scan-8a02',
@@ -187,7 +187,7 @@ export const recentActivityMock: RecentScanMock[] = [
     status: 'completed',
     startTime: '2026-06-19T09:40:00Z',
     endTime: '2026-06-19T09:52:18Z',
-    score: { ...securityScoreMock, total: 81, grade: 'B', riskLevel: 'MEDIUM' },
+    score: { ...securityScoreMock, total: 81, grade: 'B', riskLevel: 'VULNERABLE' },
   },
   {
     id: 'scan-7c19',
@@ -195,7 +195,7 @@ export const recentActivityMock: RecentScanMock[] = [
     status: 'completed',
     startTime: '2026-06-18T20:15:00Z',
     endTime: '2026-06-18T20:24:47Z',
-    score: { ...securityScoreMock, total: 92, grade: 'A', riskLevel: 'LOW' },
+    score: { ...securityScoreMock, total: 92, grade: 'A', riskLevel: 'VULNERABLE' },
   },
   {
     id: 'scan-6b88',
@@ -203,6 +203,6 @@ export const recentActivityMock: RecentScanMock[] = [
     status: 'error',
     startTime: '2026-06-18T11:05:00Z',
     endTime: '2026-06-18T11:06:02Z',
-    score: { ...securityScoreMock, total: 0, grade: 'F', riskLevel: 'CRITICAL' },
+    score: { ...securityScoreMock, total: 0, grade: 'F', riskLevel: 'COMPROMETIDO' },
   },
 ]

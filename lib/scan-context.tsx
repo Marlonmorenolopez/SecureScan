@@ -189,7 +189,7 @@ export function ScanProvider({ children }: { children: ReactNode }) {
           highCount: 0
         },
         recommendations: [],
-        riskLevel: 'MINIMAL' as RiskLevel
+        riskLevel: 'PROTEGIDO' as RiskLevel
       },
     }
     setCurrentScan(initialScan)

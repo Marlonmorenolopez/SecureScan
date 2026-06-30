@@ -110,6 +110,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     group_add:
       - "132"
+      - "0"
     networks:
       - securescan-net
       - lab-net

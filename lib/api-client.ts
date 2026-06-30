@@ -89,7 +89,7 @@ interface ScanStep {
 type Grade = 'A+' | 'A' | 'A-' | 'B+' | 'B' | 'B-' | 'C+' | 'C' | 'C-' | 'D+' | 'D' | 'F'
 
 // CORRECCIÓN #3: RiskLevel nuevo, alineado con get_risk_level() en scoring.py.
-type RiskLevel = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | 'MINIMAL'
+type RiskLevel = 'COMPROMETIDO' | 'EXPUESTO' | 'VULNERABLE' | 'PROTEGIDO' | 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | 'MINIMAL'
 
 type SeverityBreakdown = {
   critical: number

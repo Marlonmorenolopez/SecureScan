@@ -58,8 +58,19 @@ function ScoreCard({ score }: ScoreCardProps) {
   const t = useTranslations('results')
   const totalIssues  = Object.values(score.breakdown).reduce((a, b) => a + b, 0)
   const criticalHigh = (score.breakdown.critical ?? 0) + (score.breakdown.high ?? 0)
-  const riskBadgeType = (score.riskLevel?.toLowerCase() ?? 'info') as
-    'critical' | 'high' | 'medium' | 'low' | 'info'
+  const riskLevelToBadge: Record<string, 'critical' | 'high' | 'medium' | 'low' | 'info'> = {
+    COMPROMETIDO: 'critical',
+    EXPUESTO:     'high',
+    VULNERABLE:   'medium',
+    PROTEGIDO:    'low',
+    // compatibilidad con valores anteriores
+    CRITICAL: 'critical',
+    HIGH:     'high',
+    MEDIUM:   'medium',
+    LOW:      'low',
+    MINIMAL:  'low',
+  }
+  const riskBadgeType = riskLevelToBadge[score.riskLevel ?? ''] ?? 'info'
 
   return (
     <CyberCard glow padding="p-6" className="overflow-hidden">

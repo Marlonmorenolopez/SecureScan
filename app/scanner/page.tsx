@@ -222,12 +222,17 @@ function LabsBar() {
 // fuente de verdad para todo el Scanner, sin heurísticas duplicadas en el
 // cliente que puedan no coincidir con el cálculo real.
 
-const RISK_LEVEL_STYLE: Record<string, { label: string; color: string }> = {
-  CRITICAL: { label: 'CRÍTICO', color: 'text-red-400'     },
-  HIGH:     { label: 'ALTO',    color: 'text-orange-400'  },
-  MEDIUM:   { label: 'MEDIO',   color: 'text-amber-400'   },
-  LOW:      { label: 'BAJO',    color: 'text-blue-400'    },
-  MINIMAL:  { label: 'SEGURO',  color: 'text-emerald-400' },
+const RISK_LEVEL_STYLE: Record<string, { label: string; color: string; emoji: string }> = {
+  COMPROMETIDO: { label: 'Comprometido', color: 'text-red-400',     emoji: '☠️'  },
+  EXPUESTO:     { label: 'Expuesto',     color: 'text-orange-400',  emoji: '🚨' },
+  VULNERABLE:   { label: 'Vulnerable',   color: 'text-amber-400',   emoji: '⚠️'  },
+  PROTEGIDO:    { label: 'Protegido',    color: 'text-emerald-400', emoji: '🛡️'  },
+  // compatibilidad con valores anteriores
+  CRITICAL: { label: 'Comprometido', color: 'text-red-400',     emoji: '☠️'  },
+  HIGH:     { label: 'Expuesto',     color: 'text-orange-400',  emoji: '🚨' },
+  MEDIUM:   { label: 'Vulnerable',   color: 'text-amber-400',   emoji: '⚠️'  },
+  LOW:      { label: 'Vulnerable',   color: 'text-blue-400',    emoji: '⚠️'  },
+  MINIMAL:  { label: 'Protegido',    color: 'text-emerald-400', emoji: '🛡️'  },
 }
 
 function GlobalScore({ score, counts }: { score: SecurityScore; counts: Record<Severity, number> }) {
